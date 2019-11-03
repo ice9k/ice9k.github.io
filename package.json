@@ -5,6 +5,8 @@
   "dependencies": {
     "@babel/runtime": "^7.6.3",
     "antd": "^3.24.2",
+    "mobx": "^5.13.0",
+    "mobx-react": "^6.1.1",
     "mobx-react-lite": "^1.5.0",
     "node-sass": "^4.13.0",
     "react": "^16.10.2",
@@ -33,6 +35,13 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-standard": "^4.0.1",
     "mobx": "^5.14.2",
     "stylus": "^0.54.7",
     "typescript": "^3.6.4"
