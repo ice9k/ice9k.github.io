@@ -8,13 +8,11 @@ const Pagination = ({cardsPerPage, totalCards, paginate, setCardsPerPage, curren
     let tempArr = []
     
      if (pageNumbers >=9) {
-        let offset2Right = currentPage +2
-        let offset2Left = currentPage -2
-        while (offset2Left < 1) {offset2Left++}
-        while (offset2Right > pageNumbers) {offset2Right--}
-        let offset1Left = offset2Left+1
-        let offset1Right = offset2Right-1
-        pagesToRender.push(1, offset2Left, offset1Left, currentPage, offset1Right, offset2Right, pageNumbers)
+        let offsetRight = currentPage +2
+        let offsetLeft = currentPage -2
+        while (offsetLeft < 1) {offsetLeft++}
+        while (offsetRight > pageNumbers) {offsetRight--}
+        pagesToRender.push(1, offsetLeft, offsetLeft+1, currentPage, offsetRight-1, offsetRight, pageNumbers)
         console.log(offset1Left)
         tempArr = lodash.uniq(pagesToRender)
         
