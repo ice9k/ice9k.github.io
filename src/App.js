@@ -1,17 +1,19 @@
 import React from 'react';
 import { useLocalStore, useObserver } from 'mobx-react-lite';
-
+import { Pagination } from 'antd';
+import 'antd/dist/antd.css';
 import './App.css';
 import CardList from './components/CardList/CardList';
 import SearchBar from './components/SearchBar/SearchBar';
-import Pagination from './components/Pagination/Pagination';
+
 
 const App = () => {
   const state = useLocalStore(() => ({
     cards: [],
     isLoading: false,
     currentPage: 1,
-    cardsPerPage: 10
+    cardsPerPage: 10,
+  
   }));
 
   const setIsLoading = boolean => {
@@ -28,9 +30,11 @@ const App = () => {
     const currentCards = state.cards.slice(indexOfFirstCard, indexOfLastCard);
     return currentCards;
   };
-
-  const pagesCount = Math.ceil(state.cards.length / state.cardsPerPage);
-  const setCardsPerPage = (number) => {state.cardsPerPage = number}
+  
+  const setCardsPerPage = (current , number) => { 
+    state.cardsPerPage = number
+    paginate(1)
+ }
   const paginate = pageNumber => {
     state.currentPage = pageNumber}
 
@@ -44,16 +48,17 @@ const App = () => {
           <CardList isLoading={state.isLoading} cards={slicedArr()} />
         )}
 
-        {state.cards.length ? (
+        {state.cards.length && !state.isLoading? (
           <Pagination
-            totalCards={state.cards.length}
-            currentPage={state.currentPage}
-            pagesCount={pagesCount}
-            cardsPerPage={state.cardsPerPage}
-            setCardsPerPage={setCardsPerPage}
-            paginate={paginate}
-
-          />
+          showSizeChanger
+          onShowSizeChange={setCardsPerPage}
+          defaultCurrent={1}
+          current={state.currentPage}
+          onChange={paginate}
+          pageSizeOptions={['10', '20', '30']}
+          total={state.cards.length}
+          pageSize = {state.cardsPerPage}
+        />
         ) : (
           ''
         )}
