@@ -14,7 +14,7 @@
     "typeface-roboto": "0.0.75"
   },
   "scripts": {
-    "format": "prettier-standard --format",
+    "format": "prettier-standard --lint --format",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -36,6 +36,13 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-standard": "^4.0.1",
     "mobx": "^5.14.2",
     "prettier-standard": "^15.0.1",
     "stylus": "^0.54.7",

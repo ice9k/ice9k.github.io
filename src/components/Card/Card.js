@@ -1,15 +1,15 @@
-import React from 'react';
-import { useLocalStore, useObserver } from 'mobx-react-lite';
-import './Card.sass';
-import Modal from '@material-ui/core/Modal';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import React from 'react'
+import { useLocalStore, useObserver } from 'mobx-react-lite'
+import './Card.sass'
+import Modal from '@material-ui/core/Modal'
+import { makeStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 
 const PokemonCard = props => {
   const state = useLocalStore(() => ({
     isOpen: false
-  }));
+  }))
 
   const useCardStyles = makeStyles({
     card: {
@@ -26,7 +26,7 @@ const PokemonCard = props => {
     pos: {
       marginBottom: 12
     }
-  });
+  })
 
   const useModalStyles = makeStyles(theme => ({
     modal: {
@@ -40,17 +40,17 @@ const PokemonCard = props => {
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3)
     }
-  }));
+  }))
 
-  const modalClasses = useModalStyles();
-  const cardClasses = useCardStyles();
+  const modalClasses = useModalStyles()
+  const cardClasses = useCardStyles()
 
   const openCard = () => {
-    state.isOpen = true;
-  };
+    state.isOpen = true
+  }
   const closeCard = () => {
-    state.isOpen = false;
-  };
+    state.isOpen = false
+  }
 
   return useObserver(() => (
     <>
@@ -67,7 +67,10 @@ const PokemonCard = props => {
             <p>{props.card.id}</p>
             <h2>{props.card.name}</h2>
             {props.card.types.map(type => (
-              <div className={type.type.name + ' pokemonTypes'}>
+              <div
+                key={type.type.name}
+                className={type.type.name + ' pokemonTypes'}
+              >
                 {type.type.name}
               </div>
             ))}
@@ -89,7 +92,9 @@ const PokemonCard = props => {
             <div className='pokemonStats'>
               <h2>{props.card.name.toUpperCase()}</h2>
               {props.card.stats.map(stat => (
-                <div>{stat.stat.name + ' : ' + stat.base_stat}</div>
+                <div key={stat.stat.name}>
+                  {stat.stat.name + ' : ' + stat.base_stat}
+                </div>
               ))}
             </div>
           </div>
@@ -101,7 +106,7 @@ const PokemonCard = props => {
         </div>
       </Modal>
     </>
-  ));
-};
+  ))
+}
 
-export default PokemonCard;
+export default PokemonCard

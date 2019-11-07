@@ -1,7 +1,7 @@
-import React from 'react';
-import { useLocalStore, useObserver } from 'mobx-react-lite';
-import './SearchBar.sass';
-import Pokeapi from '../Pokeapi/Pokeapi';
+import React from 'react'
+import { useLocalStore, useObserver } from 'mobx-react-lite'
+import './SearchBar.sass'
+import Pokeapi from '../Pokeapi/Pokeapi'
 
 const typeNames = [
   'normal',
@@ -22,43 +22,43 @@ const typeNames = [
   'dragon',
   'dark',
   'fairy'
-];
+]
 
 const SearchBar = props => {
   const state = useLocalStore(() => ({
     input: '',
     types: []
-  }));
+  }))
 
   const searchPokemon = async () => {
-    const pokeapi = new Pokeapi();
-    const filteredList = await pokeapi.searchByName(state.input);
-    const info = await pokeapi.getPokemonInfo(filteredList);
-    props.saveCards(info);
-  };
+    const pokeapi = new Pokeapi()
+    const filteredList = await pokeapi.searchByName(state.input)
+    const info = await pokeapi.getPokemonInfo(filteredList)
+    props.saveCards(info)
+  }
   const searchPokemonByType = async () => {
-    const pokeapi = new Pokeapi();
-    const filteredList = await pokeapi.searchByType(state.types, state.input);
+    const pokeapi = new Pokeapi()
+    const filteredList = await pokeapi.searchByType(state.types, state.input)
 
-    const info = await pokeapi.getPokemonInfo(filteredList);
-    props.saveCards(info);
-  };
+    const info = await pokeapi.getPokemonInfo(filteredList)
+    props.saveCards(info)
+  }
   const handleSearch = async () => {
-    props.setIsLoading(true);
-    state.types.length ? await searchPokemonByType() : await searchPokemon();
-    props.setIsLoading(false);
-  };
+    props.setIsLoading(true)
+    state.types.length ? await searchPokemonByType() : await searchPokemon()
+    props.setIsLoading(false)
+  }
   const toggleType = event => {
-    const typeName = event.target.id;
-    let newArr = [];
+    const typeName = event.target.id
+    let newArr = []
     if (state.types.includes(typeName)) {
-      newArr = state.types.filter(type => type !== typeName);
+      newArr = state.types.filter(type => type !== typeName)
     } else {
-      newArr = state.types.slice();
-      newArr.push(typeName);
+      newArr = state.types.slice()
+      newArr.push(typeName)
     }
-    state.types = newArr;
-  };
+    state.types = newArr
+  }
 
   return useObserver(() => (
     <div className='SearchBar'>
@@ -69,11 +69,12 @@ const SearchBar = props => {
           value={state.input}
         />
 
-        <div onClick={handleSearch}> Let's Go </div>
+        <div onClick={handleSearch}> Search </div>
       </div>
       <div className='SearchBar-sort-options'>
         {typeNames.map(type => (
           <div
+            key={type}
             className={
               type + ' typeDiv ' + (state.types.includes(type) ? 'Active' : '')
             }
@@ -85,7 +86,7 @@ const SearchBar = props => {
         ))}
       </div>
     </div>
-  ));
-};
+  ))
+}
 
-export default SearchBar;
+export default SearchBar
