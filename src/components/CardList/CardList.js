@@ -1,12 +1,12 @@
 import React from 'react';
 import './CardList.sass';
-import Card from '../Card/Card';
+import PokemonCard from '../Card/Card';
 
 
-const CardList = ({isLoading, cards}) => {
+const CardList = ({ cards}) => {
   const renderCurrentCards = () => {
     const list = cards.map(card => {
-      return <Card key={card.id} card={card} />
+      return <PokemonCard key={card.id} card={card} />
     });
     return list
   };

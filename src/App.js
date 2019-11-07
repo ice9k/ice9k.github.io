@@ -30,6 +30,9 @@ const App = () => {
   };
 
   const pagesCount = Math.ceil(state.cards.length / state.cardsPerPage);
+  const setCardsPerPage = (number) => {state.cardsPerPage = number}
+  const paginate = pageNumber => {
+    state.currentPage = pageNumber}
 
   return useObserver(() => (
     <>
@@ -46,8 +49,10 @@ const App = () => {
             totalCards={state.cards.length}
             currentPage={state.currentPage}
             pagesCount={pagesCount}
-            cards={slicedArr}
             cardsPerPage={state.cardsPerPage}
+            setCardsPerPage={setCardsPerPage}
+            paginate={paginate}
+
           />
         ) : (
           ''

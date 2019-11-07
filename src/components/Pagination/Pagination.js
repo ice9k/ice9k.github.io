@@ -2,63 +2,51 @@ import lodash from 'lodash';
 import React from 'react';
 import './Pagination.sass';
 
-import { useLocalStore, useObserver } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
 
-const Pagination = ({ currentPage, allCards, totalCards, pagesCount, cardsPerPage}) => {
-  const state = useLocalStore(() => ({
-    currentPage: 1,
-    cardsPerPage: 10
+const Pagination = props => {
+  let tempArr = [];
+  const pagesToRender = [];
 
-  }));
-  const setCardsPerPage = (number) => (cardsPerPage = number);  
-  let tempArr = []
-  const pagesToRender = []  
-  const paginate = pageNumber => {
-    currentPage = pageNumber;
-   
-  };
-
-  if (pagesCount >= 9) {
-    let offset2Right = state.currentPage + 2;
-    let offset2Left = state.currentPage - 2;
+  if (props.pagesCount >= 9) {
+    let offset2Right = props.currentPage + 2;
+    let offset2Left = props.currentPage - 2;
     while (offset2Left < 1) {
       offset2Left++;
     }
-    while (offset2Right > pagesCount) {
+    while (offset2Right > props.pagesCount) {
       offset2Right--;
     }
     let offset1Left = offset2Left + 1;
     let offset1Right = offset2Right - 1;
     pagesToRender.push(
-      1,
+      1, '...',
       offset2Left,
       offset1Left,
-      state.currentPage,
+      props.currentPage,
       offset1Right,
       offset2Right,
-      pagesCount
+      '..>',
+      props.pagesCount
     );
-    
-    tempArr = lodash.uniq(pagesToRender);
 
-    
+    tempArr = lodash.uniq(pagesToRender);
   } else {
-    for (let i = pagesCount; i > 0; i--) {
+    for (let i = props.pagesCount; i > 0; i--) {
       tempArr.push(i);
       tempArr.sort((a, b) => a - b);
     }
   }
-
   return useObserver(() => (
     <nav className='Pagination'>
       {tempArr.map(number => (
         <div
           className={
-            'pageNumber ' + (currentPage === number ? 'ActivePage' : '')
+            'pageNumber ' + (props.currentPage === number ? 'ActivePage' : '')
           }
           key={number}
           onClick={() => {
-            paginate(number);
+            props.paginate(number);
           }}
         >
           <span href='!#'>{number}</span>
@@ -68,8 +56,8 @@ const Pagination = ({ currentPage, allCards, totalCards, pagesCount, cardsPerPag
       <select
         className='Selector'
         onChange={event => {
-          setCardsPerPage(event.target.value);
-          paginate(1);
+          props.setCardsPerPage(event.target.value);
+          props.paginate(1);
         }}
       >
         <option>10</option>

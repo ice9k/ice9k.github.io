@@ -3,13 +3,33 @@ import { useLocalStore, useObserver } from 'mobx-react-lite';
 import './Card.sass';
 import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
-const Card = props => {
+
+const PokemonCard = props => {
   const state = useLocalStore(() => ({
     isOpen: false
   }));
 
-  const useStyles = makeStyles(theme => ({
+  const useCardStyles = makeStyles({
+    card: {
+      minWidth: 200,
+    },
+    bullet: {
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)',
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+  });
+
+  const useModalStyles = makeStyles(theme => ({
     modal: {
       display: 'flex',
       alignItems: 'center',
@@ -23,7 +43,8 @@ const Card = props => {
     }
   }));
 
-  const classes = useStyles();
+  const modalClasses = useModalStyles();
+  const cardClasses = useCardStyles()
 
   const openCard = () => {
     state.isOpen = true;
@@ -34,7 +55,8 @@ const Card = props => {
   console.log(state.isOpen);
   return useObserver(() => (
     <>
-      <div className='Card' onClick={openCard}>
+      <Card className={cardClasses.card} onClick={openCard}>
+      <CardContent> 
         <div className='image-container'>
           <img
             className='cardimg'
@@ -51,9 +73,10 @@ const Card = props => {
             </div>
           ))}
         </div>
-      </div>
-      <Modal open={state.isOpen} onClose={closeCard} className={classes.modal}>
-        <div className={classes.paper + ' mainModal'}>
+      </CardContent>
+      </Card>
+      <Modal open={state.isOpen} onClose={closeCard} className={modalClasses.modal}>
+        <div className={modalClasses.paper + ' mainModal'}>
           <div className='mainModalContainer'>
             <img
               className='MainModalImage'
@@ -77,4 +100,4 @@ const Card = props => {
   ));
 };
 
-export default Card;
+export default PokemonCard;
