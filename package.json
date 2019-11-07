@@ -4,23 +4,16 @@
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.6.3",
+    "@material-ui/core": "^4.6.0",
     "antd": "^3.24.2",
     "mobx-react-lite": "^1.5.0",
     "node-sass": "^4.13.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "typeface-roboto": "0.0.75"
   },
   "scripts": {
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "linters": {
-      "**/*": [
-        "prettier-standard --lint",
-        "git add"
-      ]
-    },
     "format": "prettier-standard --format",
     "start": "react-scripts start",
     "build": "react-scripts build",

@@ -41,11 +41,9 @@ const SearchBar = props => {
     const filteredList = await pokeapi.searchByType(state.types, state.input);
 
     const info = await pokeapi.getPokemonInfo(filteredList);
-    console.log(info);
     props.saveCards(info);
   };
   const handleSearch = async () => {
-    console.log(props);
     props.setIsLoading(true);
     state.types.length ? await searchPokemonByType() : await searchPokemon();
     props.setIsLoading(false);

@@ -38,10 +38,10 @@ const Pagination = ({ currentPage, allCards, totalCards, pagesCount, cardsPerPag
       offset2Right,
       pagesCount
     );
-    console.log(offset1Left);
+    
     tempArr = lodash.uniq(pagesToRender);
 
-    console.log(tempArr);
+    
   } else {
     for (let i = pagesCount; i > 0; i--) {
       tempArr.push(i);
