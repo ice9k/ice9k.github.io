@@ -2,7 +2,7 @@ import React from 'react'
 import { useLocalStore, useObserver } from 'mobx-react-lite'
 import { Pagination } from 'antd'
 import 'antd/dist/antd.css'
-import './App.sass'
+import './App.css'
 import CardList from './components/CardList/CardList'
 import SearchBar from './components/SearchBar/SearchBar'
 
